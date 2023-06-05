@@ -1,0 +1,22 @@
+body {
+    background-color: #ECE5C7;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #116A7B;
+    font-family: "Roboto", sans-serif;
+}
+
+button {
+    background-color: #ECE5C7;
+    padding: 12px;
+    border: solid #CDC2AE 2px;
+    border-radius: 16px;
+}
+
+.result {
+    font-weight: 900;
+    font-size: 24px;
+}

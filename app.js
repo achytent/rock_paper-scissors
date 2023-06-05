@@ -4,19 +4,23 @@
     scissors - 2
 */
 
+let playerScore = 0;
+let computerScore = 0;
+
 function getComputerChoice() {
     const choice = Math.floor(Math.random() * 3)
     switch(choice){
         case 0:
             return "rock"
-            break
         case 1:
             return "paper"
-            break
         case 2:
             return "scissors"
-            break
     }
+}
+
+function getPlayerChoice(event){
+    return event.target.id;
 }
 
 function playRound(playerSelection, computerSelection){
@@ -25,34 +29,42 @@ function playRound(playerSelection, computerSelection){
     switch(playerSelection){
         case "rock":
             if (computerSelection == "scissors"){
-                return "You win!"
+                playerScore++;
+                return "You win!";
             } else {
+                computerScore++;
                 return "You lose!"
             }
         case "paper":
             if (computerSelection == "rock"){
+                playerScore++;
                 return "You win!"
             } else {
+                computerScore++;
                 return "You lose!"
             }
         case "scissors":
             if (computerSelection == "paper"){
+                playerScore++;
                 return "You win!"
             } else {
+                computerScore++;
                 return "You lose!"
             }
     }
 }
 
-function getPlayerChoice(){
-    const playerSelection = prompt("Enter your choice")
-    return playerSelection.toLowerCase()
-}
+const buttons = document.querySelectorAll('button');
+const resultDiv = document.querySelector('div.result');
+const playerScoreSpan = document.querySelector('span.player-score')
+const computerScoreSpan = document.querySelector('span.computer-score')
 
-function game() {
-    for(let i = 0; i < 5; i++){
-        console.log(playRound(getPlayerChoice(), getComputerChoice()))
+buttons.forEach(button => button.addEventListener('click', function (event) {
+    const result = playRound(getPlayerChoice(event), getComputerChoice())
+    resultDiv.textContent = result;
+    playerScoreSpan.textContent = playerScore;
+    computerScoreSpan.textContent = computerScore;
+    if(playerScore == 5 || computerScore == 5){
+        buttons.forEach(button => button.remove())
     }
-}
-
-game()
+}))
